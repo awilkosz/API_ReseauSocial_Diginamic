@@ -2,9 +2,12 @@
   "name": "node_reseausocial_diginamic",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "watch": "nodemon server.js",
+    "client": "cd ../React_ReseauSocial_Diginamic/react_reseausocial_diginamic && npm start",
+    "build": "cd ../React_ReseauSocial_Diginamic/react_reseausocial_diginamic && npm run build"
   },
   "repository": {
     "type": "git",
@@ -18,11 +21,15 @@
   "homepage": "https://github.com/awilkosz/Node_ReseauSocial_Diginamic#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-jwt": "^6.0.0",
     "jsonwebtoken": "^8.5.1",
     "sequelize": "^6.6.2",
     "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
   }
 }
