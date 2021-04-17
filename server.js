@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+
 //const jwtMiddelware = require("express-jwt");
 require('dotenv').config();
 
@@ -11,6 +12,8 @@ const Sequelize = require("sequelize");
 
 const PORT = process.env.PORT || 5000;
 //const SECRET = process.env.SECRET;
+
+const DOMAIN = 'https://react-reseau-social-diginamic.herokuapp.com';
 
 const app = express();
 
@@ -33,6 +36,11 @@ err ? rep.status(err.status).json({ error: err.message }) : next();
 
 app.use(express.json());
 
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", DOMAIN);
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 //app.use("/user", userRouter(sequelize, SECRET));
 
 //app.use(express.static('../React_ReseauSocial_Diginamic/react_reseausocial_diginamic/build'));
@@ -44,7 +52,7 @@ app.get('/api/test' , (_, res) => {
 });
 
 app.get('/*', (_, res) => {
-    //res.sendFile(path.join(__dirname, '../React_ReseauSocial_Diginamic/react_reseausocial_diginamic/build/index.html'))
+    res.sendFile(path.join(__dirname, '../React_ReseauSocial_Diginamic/react_reseausocial_diginamic/build/index.html'))
     res.send({
         msg: "Hello WORLD!"
     });
