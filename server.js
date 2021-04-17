@@ -35,7 +35,7 @@ app.use(express.json());
 
 //app.use("/user", userRouter(sequelize, SECRET));
 
-app.use(express.static('../React_ReseauSocial_Diginamic/react_reseausocial_diginamic/build'));
+//app.use(express.static('../React_ReseauSocial_Diginamic/react_reseausocial_diginamic/build'));
 
 app.get('/api/test' , (_, res) => {
     res.send({
@@ -44,7 +44,10 @@ app.get('/api/test' , (_, res) => {
 });
 
 app.get('/*', (_, res) => {
-    res.sendFile(path.join(__dirname, '../React_ReseauSocial_Diginamic/react_reseausocial_diginamic/build/index.html'))
+    //res.sendFile(path.join(__dirname, '../React_ReseauSocial_Diginamic/react_reseausocial_diginamic/build/index.html'))
+    res.send({
+        msg: "Hello WORLD!"
+    });
 });
 
 app.listen(PORT, () => {
