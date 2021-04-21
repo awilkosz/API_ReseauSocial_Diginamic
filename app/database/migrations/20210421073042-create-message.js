@@ -1,30 +1,33 @@
 'use strict';
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-
-    return queryInterface.createTable('user_role', { 
+    await queryInterface.createTable('messages', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      user_id: {
+      contenu: {
+        type: Sequelize.TEXT
+      },
+      privacy: {
+        type: Sequelize.STRING
+      },
+      emmetId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         references: {
           model: "users",
           key: "id"
-        }
+        },
+        onDelete: "CASCADE"
       },
-      role_id: {
+      destiId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         references: {
-          model: "roles",
+          model: "users",
           key: "id"
-        }
+        },
       },
       createdAt: {
         allowNull: false,
@@ -34,11 +37,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-     });
+    });
   },
-
   down: async (queryInterface, Sequelize) => {
-
-     return queryInterface.dropTable('user_role');
+    await queryInterface.dropTable('messages');
   }
 };

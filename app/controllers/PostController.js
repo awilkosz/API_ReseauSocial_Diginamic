@@ -8,5 +8,4 @@ module.exports = {
 
         res.json(posts);
     }
-
 }

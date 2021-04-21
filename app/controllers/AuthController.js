@@ -2,6 +2,7 @@ const { User } = require('../models/index');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const authConfig = require('../../config/auth');
+const { Op } = require("sequelize");
 
 module.exports = {
 
@@ -72,5 +73,17 @@ module.exports = {
             res.status(500).json(err);
         });
 
+    },
+
+    async getUserByName(req, res) {
+        let name = req.params.name;
+        let users = await User.findAll({
+            where: {
+                name: {
+                    [Op.substring]: name,
+                }
+            }
+        })
+        res.json(users);
     },
 }
