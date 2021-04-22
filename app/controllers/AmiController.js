@@ -28,7 +28,7 @@ module.exports = {
 
     getFriendRequests(req, res) {
         let id = req.params.id;
-        let sql = "SELECT est_amis.id, userId, amiId, users.id, name, email FROM est_amis INNER JOIN users ON est_amis.userId = users.id WHERE amiId = ?";
+        let sql = "SELECT est_amis.id, userId, amiId, users.id, name, email FROM est_amis INNER JOIN users ON est_amis.userId = users.id WHERE amiId = ? AND statut = 0";
         connexion.query(sql, [id], function(err, result) {
             if (err) throw err;
             console.log(result);
