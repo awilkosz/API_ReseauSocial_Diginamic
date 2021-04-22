@@ -74,16 +74,4 @@ module.exports = {
         });
 
     },
-
-    async getUserByName(req, res) {
-        let name = req.params.name;
-        let users = await User.findAll({
-            where: {
-                name: {
-                    [Op.substring]: name,
-                }
-            }
-        })
-        res.json(users);
-    },
 }

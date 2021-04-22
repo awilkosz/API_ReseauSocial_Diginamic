@@ -1,14 +1,4 @@
 const { Message } = require('../models/index');
-const db = require('../../config/database');
-
-const mysql = require('mysql');
-
-/*var con = mysql.createConnection({
-  host: db.host,
-  user: db.username,
-  password: db.password,
-  database: db.database
-});*/
 
 module.exports = {
     
@@ -19,8 +9,8 @@ module.exports = {
     },
 
     async getMessagesUser(req, res) {
-        let emmeteurId = req.params.emmetId;
-        let messages = await Message.findAll({ where: { emmetId: emmeteurId }});
+        let destinataireId = req.params.destiId;
+        let messages = await Message.findAll({ where: { destiId: destinataireId }});
         res.json(messages);
     },
 
@@ -32,9 +22,15 @@ module.exports = {
             privacy: req.body.confidentialite,
             emmetId: req.body.author,
             destiId: req.body.desti
-        }).catch(err => {
+        }).then(
+            res.json({
+                contenu: req.body.contenu,
+                privacy: req.body.confidentialite,
+                emmetId: req.body.author,
+                destiId: req.body.desti
+            })).catch(err => {
             res.status(500).json(err);
-        });
+        })
 
     },
 }
