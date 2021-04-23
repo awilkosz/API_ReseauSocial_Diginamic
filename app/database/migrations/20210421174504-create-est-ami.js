@@ -9,6 +9,8 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userId: {
+        allowNull: false,
+        primaryKey: true,
         type: Sequelize.INTEGER,
         references: {
           model: "users",
@@ -16,6 +18,8 @@ module.exports = {
         },
       },
       amiId: {
+        allowNull: false,
+        primaryKey: true,
         type: Sequelize.INTEGER,
         references: {
           model: "users",

@@ -36,9 +36,19 @@ module.exports = {
         })
     },
 
+    getFriends(req, res) {
+        let id = req.params.id;
+        let sql = "SELECT est_amis.id, userId, amiId, users.id, name, email FROM est_amis INNER JOIN users ON est_amis.userId = users.id WHERE amiId = ? AND statut = 1";
+        connexion.query(sql, [id], function(err, result) {
+            if (err) throw err;
+            console.log(result);
+            res.json(result);
+        })
+    },
+
     accepterInvitation(req, res) {
-        let userId = req.body.idUser;
-        let amiId = req.body.idAmi;
+        let userId = req.body.idAmi;
+        let amiId = req.body.idUser;
         est_ami.update({ statut: 1 }, { where: { userId: userId, amiId: amiId }})
         .then(
             res.json({

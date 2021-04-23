@@ -36,8 +36,9 @@ router.post('/api/messages/nouveaumessage', MessageController.publierMessage);
 
 //Routes des amis
 router.get('/api/getDemandesAmi/:id', AmiController.getFriendRequests);
+router.get('/api/getAmis/:id', AmiController.getFriends);
 
 router.post('/api/demandeAmi', AmiController.demanderEnAmi);
-router.patch('/api/accepterInvitation', AmiController.accepterInvitation)
+router.patch('/api/accepterInvitation', AmiController.accepterInvitation);
 
 module.exports = router;
