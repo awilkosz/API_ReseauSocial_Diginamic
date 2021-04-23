@@ -1,4 +1,13 @@
 const { Message } = require('../models/index');
+const mysql = require('mysql');
+const db = require('../../config/database')
+
+var connexion = mysql.createConnection({
+    host: db.host,
+    user: db.username,
+    password: db.password,
+    database: db.database
+});
 
 module.exports = {
     
@@ -31,6 +40,14 @@ module.exports = {
             })).catch(err => {
             res.status(500).json(err);
         })
+    },
 
+    getFilActualite(req, res) {
+        let id = req.params.id;
+        let sql = "SELECT * FROM messages WHERE emmetId NOT IN (SELECT userId FROM est_amis WHERE userId = ?) AND (privacy LIKE 'Public' OR privacy LIKE 'Amis') ORDER BY createdAt DESC";
+        connexion.query(sql, [id], function(err, result) {
+            if (err) throw err;
+            res.json(result);
+        })
     },
 }

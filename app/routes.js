@@ -31,6 +31,7 @@ router.get('/api/posts', auth, PostController.index);
 //Routes des messages
 router.get('/api/messages', MessageController.index);
 router.get('/api/messages/:destiId', MessageController.getMessagesUser);
+router.get('/api/filActu/:id', MessageController.getFilActualite);
 
 router.post('/api/messages/nouveaumessage', MessageController.publierMessage);
 
