@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Message',
-    tableName: 'heroku_00dbab8af835151.messages'
+    tableName: 'messages'
   });
   return Message;
 };
