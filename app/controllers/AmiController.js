@@ -12,7 +12,7 @@ var connexion = mysql.createConnection({
 module.exports = {
     
     demanderEnAmi(req, res) {
-        // Créer un message
+        
         est_ami.create({
             userId: req.body.idUser,
             amiId: req.body.idAmi,
@@ -28,20 +28,18 @@ module.exports = {
 
     getFriendRequests(req, res) {
         let id = req.params.id;
-        let sql = "SELECT est_amis.id, userId, amiId, users.id, name, email FROM est_amis INNER JOIN users ON est_amis.userId = users.id WHERE amiId = ? AND statut = 0";
+        let sql = "SELECT est_amis.id, userId, amiId, statut, users.id, name, email FROM est_amis INNER JOIN users ON est_amis.userId = users.id WHERE amiId = ? AND statut = 0";
         connexion.query(sql, [id], function(err, result) {
             if (err) throw err;
-            console.log(result);
             res.json(result);
         })
     },
 
     getFriends(req, res) {
         let id = req.params.id;
-        let sql = "SELECT est_amis.id, userId, amiId, users.id, name, email FROM est_amis INNER JOIN users ON est_amis.userId = users.id WHERE amiId = ? AND statut = 1";
+        let sql = "SELECT est_amis.id, userId, amiId, statut, users.id, name, email FROM est_amis INNER JOIN users ON est_amis.userId = users.id WHERE amiId = ? AND statut = 1";
         connexion.query(sql, [id], function(err, result) {
             if (err) throw err;
-            console.log(result);
             res.json(result);
         })
     },
@@ -56,6 +54,29 @@ module.exports = {
                 amiId: req.body.idAmi,
             })).catch(err => {
             res.status(500).json(err);
+        })
+
+        est_ami.create({
+            userId: req.body.idUser,
+            amiId: req.body.idAmi,
+            statut: 1
+        }).then(
+            res.json({
+                userId: req.body.idUser,
+                amiId: req.body.idAmi,
+                statut: 1
+            })).catch(err => {
+            res.status(500).json(err);
+        })
+    },
+
+    estAmi(req, res) {
+        let userId = req.params.userId;
+        let amiId = req.params.amiId;
+        let sql = "SELECT COUNT(*) AS estAmi FROM est_amis INNER JOIN users ON est_amis.userId = users.id WHERE userId = ? AND amiId = ? AND statut = 1";
+        connexion.query(sql, [userId, amiId], function(err, result) {
+            if (err) throw err;
+            res.json(result);
         })
     }
 }
