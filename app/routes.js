@@ -10,6 +10,7 @@ const PostController = require('./controllers/PostController');
 const MessageController = require('./controllers/MessageController');
 const UserController = require('./controllers/UserController');
 const AmiController = require('./controllers/AmiController');
+const AimermessageController = require('./controllers/AimemessageController');
 
 //Home
 router.get('/', (req, res) => {
@@ -43,4 +44,6 @@ router.get('/api/getEtreAmis/:userId/:amiId', AmiController.estAmi);
 router.post('/api/demandeAmi', AmiController.demanderEnAmi);
 router.patch('/api/accepterInvitation', AmiController.accepterInvitation);
 
+//Routes aimeMessage
+router.post('/api/aimerUnMessage', AimermessageController.aimerMessage);
 module.exports = router;

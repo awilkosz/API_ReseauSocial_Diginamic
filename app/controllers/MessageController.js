@@ -13,13 +13,12 @@ module.exports = {
     
     async index(req, res) {
         let messages = await Message.findAll();
-        
         res.json(messages);
     },
 
     async getMessagesUser(req, res) {
         let destinataireId = req.params.destiId;
-        let messages = await Message.findAll({ where: { destiId: destinataireId }});
+        let messages = await Message.findAll({ where: { destiId: destinataireId }, order: [['createdAt', 'DESC']]});
         res.json(messages);
     },
 
@@ -44,8 +43,8 @@ module.exports = {
 
     getFilActualite(req, res) {
         let id = req.params.id;
-        let sql = "SELECT * FROM messages WHERE emmetId NOT IN (SELECT userId FROM est_amis WHERE userId = ?) AND (privacy LIKE 'Public' OR privacy LIKE 'Amis') ORDER BY createdAt DESC";
-        connexion.query(sql, [id], function(err, result) {
+        let sql = "SELECT * FROM messages WHERE emmetId <> ? AND emmetId IN (SELECT amiId FROM est_amis WHERE amiId <> ? AND userId = ?) ORDER BY createdAt DESC";
+        connexion.query(sql, [id, id, id], function(err, result) {
             if (err) throw err;
             res.json(result);
         })

@@ -25,9 +25,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isAlpha: {
-          msg: "Le nom peut seulement contenir des lettres"
-        },
         len: {
           args: [2, 255],
           msg: "La taille du nom doit être de 2 à 255 caractères"
