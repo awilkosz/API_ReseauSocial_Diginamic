@@ -43,6 +43,7 @@ router.get('/api/getEtreAmis/:userId/:amiId', AmiController.estAmi);
 
 router.post('/api/demandeAmi', AmiController.demanderEnAmi);
 router.patch('/api/accepterInvitation', AmiController.accepterInvitation);
+router.post('/api/creerAmitie', AmiController.accepterInvitationPartDeux);
 
 //Routes aimeMessage
 router.post('/api/aimerUnMessage', AimermessageController.aimerMessage);

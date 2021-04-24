@@ -56,6 +56,22 @@ module.exports = {
             res.status(500).json(err);
         })
 
+        /*est_ami.create({
+            userId: req.body.idUser,
+            amiId: req.body.idAmi,
+            statut: 1
+        }).then(
+            res.json({
+                userId: req.body.idUser,
+                amiId: req.body.idAmi,
+                statut: 1
+            })).catch(err => {
+            res.status(500).json(err);
+        })*/
+    },
+
+    accepterInvitationPartDeux(req, res) {
+
         est_ami.create({
             userId: req.body.idUser,
             amiId: req.body.idAmi,
