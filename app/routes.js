@@ -46,5 +46,9 @@ router.patch('/api/accepterInvitation', AmiController.accepterInvitation);
 router.post('/api/creerAmitie', AmiController.accepterInvitationPartDeux);
 
 //Routes aimeMessage
+router.get('/api/getNombresLike/:messageId', AimermessageController.getNbLikes);
+router.get('/api/estUnMessageAime/:userId/:messageId', AimermessageController.isLikedMessage);
+
 router.post('/api/aimerUnMessage', AimermessageController.aimerMessage);
+
 module.exports = router;
