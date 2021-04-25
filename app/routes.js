@@ -36,14 +36,17 @@ router.get('/api/filActu/:id', MessageController.getFilActualite);
 
 router.post('/api/messages/nouveaumessage', MessageController.publierMessage);
 
+router.patch('/api/messages/changePrivacy', MessageController.parametreConfidentialite);
+
 //Routes des amis
 router.get('/api/getDemandesAmi/:id', AmiController.getFriendRequests);
 router.get('/api/getAmis/:id', AmiController.getFriends);
 router.get('/api/getEtreAmis/:userId/:amiId', AmiController.estAmi);
 
 router.post('/api/demandeAmi', AmiController.demanderEnAmi);
-router.patch('/api/accepterInvitation', AmiController.accepterInvitation);
 router.post('/api/creerAmitie', AmiController.accepterInvitationPartDeux);
+
+router.patch('/api/accepterInvitation', AmiController.accepterInvitation);
 
 //Routes aimeMessage
 router.get('/api/getNombresLike/:messageId', AimermessageController.getNbLikes);
