@@ -12,23 +12,23 @@ var connexion = mysql.createConnection({
 module.exports = {
     
     demanderEnAmi(req, res) {
-        
-        est_ami.create({
-            userId: req.body.idUser,
-            amiId: req.body.idAmi,
-        }).then(
-            res.json({
-                userId: req.body.idUser,
-                amiId: req.body.idAmi,
-            })).catch(err => {
-            res.status(500).json(err);
+        let userId = req.body.idUser;
+        let amiId = req.body.idAmi;
+        let date = new Date();
+        let sql = "INSERT INTO est_amis (userId, amiId, statut, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?)";
+        connexion.query(sql, [userId, amiId, 0, date, date], function(err, result) {
+            if (err) {
+                //throw err;
+                result = err;
+            } ;
+            res.json(result);
         })
 
     },
 
     getFriendRequests(req, res) {
         let id = req.params.id;
-        let sql = "SELECT est_amis.id, userId, amiId, statut, users.id, name, email FROM est_amis INNER JOIN users ON est_amis.userId = users.id WHERE amiId = ? AND statut = 0";
+        let sql = "SELECT userId, amiId, statut, users.id, name, email FROM est_amis INNER JOIN users ON est_amis.userId = users.id WHERE amiId = ? AND statut = 0";
         connexion.query(sql, [id], function(err, result) {
             if (err) throw err;
             res.json(result);
@@ -37,7 +37,7 @@ module.exports = {
 
     getFriends(req, res) {
         let id = req.params.id;
-        let sql = "SELECT est_amis.id, userId, amiId, statut, users.id, name, email FROM est_amis INNER JOIN users ON est_amis.userId = users.id WHERE amiId = ? AND statut = 1";
+        let sql = "SELECT userId, amiId, statut, users.id, name, email FROM est_amis INNER JOIN users ON est_amis.userId = users.id WHERE amiId = ? AND statut = 1";
         connexion.query(sql, [id], function(err, result) {
             if (err) throw err;
             res.json(result);
@@ -72,17 +72,16 @@ module.exports = {
 
     accepterInvitationPartDeux(req, res) {
 
-        est_ami.create({
-            userId: req.body.idUser,
-            amiId: req.body.idAmi,
-            statut: 1
-        }).then(
-            res.json({
-                userId: req.body.idUser,
-                amiId: req.body.idAmi,
-                statut: 1
-            })).catch(err => {
-            res.status(500).json(err);
+        let userId = req.body.idUser;
+        let amiId = req.body.idAmi;
+        let date = new Date();
+        let sql = "INSERT INTO est_amis (userId, amiId, statut, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?)";
+        connexion.query(sql, [userId, amiId, 1, date, date], function(err, result) {
+            if (err) {
+                //throw err;
+                result = err;
+            } ;
+            res.json(result);
         })
     },
 
