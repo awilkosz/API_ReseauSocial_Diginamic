@@ -42,6 +42,7 @@ router.patch('/api/messages/changePrivacy', MessageController.parametreConfident
 router.get('/api/getDemandesAmi/:id', AmiController.getFriendRequests);
 router.get('/api/getAmis/:id', AmiController.getFriends);
 router.get('/api/getEtreAmis/:userId/:amiId', AmiController.estAmi);
+router.get('/api/getEtreAmisDeux/:userId/:amiId', AmiController.estAmi2);
 
 router.post('/api/demandeAmi', AmiController.demanderEnAmi);
 router.post('/api/creerAmitie', AmiController.accepterInvitationPartDeux);

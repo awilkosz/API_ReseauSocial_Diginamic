@@ -93,5 +93,15 @@ module.exports = {
             if (err) throw err;
             res.json(result);
         })
+    },
+
+    estAmi2(req, res) {
+        let userId = req.params.userId;
+        let amiId = req.params.amiId;
+        let sql = "SELECT statut FROM est_amis WHERE userId = ? AND amiId = ?";
+        connexion.query(sql, [userId, amiId], function(err, result) {
+            if (err) throw err;
+            res.json(result);
+        })
     }
 }
